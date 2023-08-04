@@ -1,2 +1,2 @@
 #!/bin/bash
-Cp -un*.html ../
+find . -maxdepth 1 -name "*.html" -newer ../ -exec cp -u {} ../ \;

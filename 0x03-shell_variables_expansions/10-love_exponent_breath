@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$BREATH ^ $LOVE" | bc
+echo $(echo "$BREATH ^ $LOVE" | bc)

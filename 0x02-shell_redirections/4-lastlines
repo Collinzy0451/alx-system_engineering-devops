@@ -1,2 +1,2 @@
 #!/bin/bash
-tail /ete/passwd
+tail /etc/passwd

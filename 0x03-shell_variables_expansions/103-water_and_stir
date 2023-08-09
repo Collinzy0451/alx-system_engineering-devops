@@ -1,2 +1,2 @@
 #!/bin/bash
-echo -e "ibase=water\nobase=bestchol\n$WATER + $STIR\n" | bc
+printf "%x\n" "$((16#$WATER + 16#$STIR))"

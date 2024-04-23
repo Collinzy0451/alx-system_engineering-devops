@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Installs Nginx with the following configuration
+
+apt-get update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+
+echo "Hello World!" > /var/www/html/index.html
+
+redirect_to="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/odogwukelly permanent;"
+
+sed -i "s/server_name _;/$redirect_to/" /etc/nginx/sites-enabled/default
+
+# code to create error page and add a redirect for error 404
+
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+string_for_replacement="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sed -i "s/listen 80 default_server;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+# restart nginx 
+service nginx start

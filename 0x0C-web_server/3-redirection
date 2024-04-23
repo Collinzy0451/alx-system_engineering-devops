@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Installs Nginx with the following configuration
+
+apt-get update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+
+echo "Hello World!" > /var/www/html/index.html
+
+redirect_to="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/odogwukelly permanent;"
+
+sed -i "s/server_name _;/$redirect_to/" /etc/nginx/sites-enabled/default
+
+service nginx start
